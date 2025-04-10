@@ -4,7 +4,7 @@ pipeline {
     environment {
         // 定义环境变量
         GIT_REPO = 'git@github.com:xiaojia2017/my-php.git'
-        DEPLOY_DIR = '/' 
+        DEPLOY_DIR = '/home/jenkins/my-php' 
         SSH_USER = 'jenkins'
         SSH_HOST = 'tcp://dind:2375' 
     }
@@ -39,7 +39,7 @@ pipeline {
                                     remoteDirectory: "${env.DEPLOY_DIR}",
                                     removePrefix: '',
                                     execCommand: '''
-                                        cd /home/jenkins/my-php &&
+                                        cd ${env.DEPLOY_DIR} &&
                                         docker-compose down &&
                                         docker-compose up -d
                                     '''
