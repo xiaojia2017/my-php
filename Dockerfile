@@ -1,5 +1,5 @@
 # 使用官方 PHP 镜像作为基础
-FROM php:8.1-fpm
+FROM crpi-qdxa7r1jpsbtqqwp.cn-shenzhen.personal.cr.aliyuncs.com/docker20250406/k8s:php-8.1-fpm
 
 # 安装必要的扩展
 RUN docker-php-ext-install pdo_mysql
