@@ -39,7 +39,9 @@ pipeline {
                                     remoteDirectory: "${env.DEPLOY_DIR}",
                                     removePrefix: '',
                                     execCommand: '''
-                                        cd ${env.DEPLOY_DIR} &&
+									    echo "Current directory: \$(pwd)" &&
+										ls -la /home/jenkins/my-php &&
+                                        cd /home/jenkins/my-php &&
                                         docker-compose down &&
                                         docker-compose up -d
                                     '''
