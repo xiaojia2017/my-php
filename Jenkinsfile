@@ -25,6 +25,13 @@ pipeline {
                 }
             }
         }
+		
+        stage('Debug Path') {
+            steps {
+              sh 'pwd' // 查看当前工作目录的绝对路径
+              sh 'ls -la' // 查看当前目录下的文件结构
+            }
+        }
 
         stage('Deploy to Server') {
             steps {
@@ -39,9 +46,9 @@ pipeline {
                                     remoteDirectory: "${env.DEPLOY_DIR}",
                                     removePrefix: '',
                                     execCommand: '''
-									    echo "Current directory: \$(pwd)" &&
-										ls -la /home/jenkins/my-php &&
-                                        cd /home/jenkins/my-php &&
+									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
+                                        ls -la ${env.DEPLOY_DIR} &&
+                                        cd ${env.DEPLOY_DIR} &&
                                         docker-compose down &&
                                         docker-compose up -d
                                     '''
