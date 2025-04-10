@@ -36,8 +36,9 @@ pipeline {
 		stage('Prepare Deploy') {
              steps {
                script {
-               // 获取当前工作目录的最后一层目录名（即 Jenkins 任务名）
-               env.REMOVE_PREFIX = "${env.JOB_NAME}/"  // 直接使用 Jenkins 内置变量
+                 // 获取当前工作目录的最后一层目录名（即 Jenkins 任务名）
+                 env.WORKSPACE_DIR = pwd().split('/')[-1]
+			     echo "Workspace Directory: ${env.WORKSPACE_DIR}"
                }
             }
         }
@@ -53,7 +54,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: '**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: "${env.REMOVE_PREFIX}",
+                                    removePrefix: "${env.WORKSPACE_DIR}",
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
