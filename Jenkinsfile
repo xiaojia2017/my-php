@@ -32,6 +32,15 @@ pipeline {
               sh 'ls -la' // 查看当前目录下的文件结构
             }
         }
+		
+		stage('Prepare Deploy') {
+             steps {
+               script {
+               // 获取当前工作目录的最后一层目录名（即 Jenkins 任务名）
+               env.REMOVE_PREFIX = "${env.JOB_NAME}/"  // 直接使用 Jenkins 内置变量
+               }
+            }
+        }
 
         stage('Deploy to Server') {
             steps {
@@ -44,7 +53,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: '**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: 'PHP-Deploy/',
+                                    removePrefix: "${env.REMOVE_PREFIX}",
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
