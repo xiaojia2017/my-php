@@ -44,7 +44,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: '**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: 'PHP-Deploy',
+                                    removePrefix: 'PHP-Deploy/',
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
