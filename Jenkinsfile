@@ -37,8 +37,8 @@ pipeline {
              steps {
                script {
                  // 获取当前工作目录的最后一层目录名（即 Jenkins 任务名）
-                 env.WORKSPACE_DIR = pwd().split('/')[-1]
-			     echo "Workspace Directory: ${env.WORKSPACE_DIR}"
+                 env.WORKSPACE_PATH = pwd() + '/'  // 例如：/var/jenkins_home/workspace/PHP-Deploy/
+			     echo "Workspace Directory: ${env.WORKSPACE_PATH}"
                }
             }
         }
@@ -54,7 +54,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: '**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: "${env.WORKSPACE_DIR}",
+                                    removePrefix: "${env.WORKSPACE_PATH}",
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
