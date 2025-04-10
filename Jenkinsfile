@@ -54,7 +54,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: '**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: "${env.WORKSPACE_PATH}",
+                                    removePrefix: "/var/jenkins_home/workspace/PHP-Deploy/",
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
