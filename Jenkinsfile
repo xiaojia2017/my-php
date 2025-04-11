@@ -52,9 +52,9 @@ pipeline {
                             configName: 'jenkins',
                             transfers: [
                                 sshTransfer(
-                                    sourceFiles: '**/*',
+                                    sourceFiles: '${env.WORKSPACE}/**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: "${env.REMOVE_PREFIX}",
+                                    removePrefix: "${env.REMOVE_PREFIX}/",
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
