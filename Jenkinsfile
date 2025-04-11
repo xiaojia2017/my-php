@@ -49,7 +49,7 @@ pipeline {
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" && 
                                         ls -la ${env.DEPLOY_DIR} &&
-                                        cd ${env.DEPLOY_DIR} &&
+                                        cd /my-php &&
                                         docker-compose down &&
                                         docker-compose up -d
                                     '''
