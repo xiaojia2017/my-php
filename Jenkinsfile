@@ -46,7 +46,7 @@ pipeline {
                                     remoteDirectory: "${env.DEPLOY_DIR}",
                                     removePrefix: '',
                                     execCommand: '''
-									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
+									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" && 
                                         ls -la ${env.DEPLOY_DIR} &&
                                         cd ${env.DEPLOY_DIR} &&
                                         docker-compose down &&
