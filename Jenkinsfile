@@ -30,7 +30,10 @@ pipeline {
             steps {
               sh 'pwd' // 查看当前工作目录的绝对路径
               sh 'ls -la' // 查看当前目录下的文件结构
-			  sh 'echo "DEPLOY_DIR: ${env.DEPLOY_DIR}"'
+			  sh """
+            #!/bin/bash
+            echo "DEPLOY_DIR: ${env.DEPLOY_DIR}"
+        """
             }
         }
 
@@ -49,7 +52,7 @@ pipeline {
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" && 
                                         ls -la ${env.DEPLOY_DIR} &&
-                                        cd /my-php &&
+                                        cd ${env.DEPLOY_DIR} &&
                                         docker-compose down &&
                                         docker-compose up -d
                                     '''
