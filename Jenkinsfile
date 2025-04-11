@@ -30,6 +30,7 @@ pipeline {
             steps {
               sh 'pwd' // 查看当前工作目录的绝对路径
               sh 'ls -la' // 查看当前目录下的文件结构
+			  sh 'echo "DEPLOY_DIR: ${env.DEPLOY_DIR}"'
             }
         }
 
