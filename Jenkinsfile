@@ -39,7 +39,7 @@ pipeline {
 
         stage('Deploy to Server') {
             steps {
-                // 使用 SSH 将文件同步到目标服务器
+                // 使用 SSH 将文件同步到目标服务器 
                 sshPublisher(
                     publishers: [
                         sshPublisherDesc(
