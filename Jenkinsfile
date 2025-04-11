@@ -4,7 +4,7 @@ pipeline {
     environment {
         // 定义环境变量
         GIT_REPO = 'git@github.com:xiaojia2017/my-php.git' 
-        DEPLOY_DIR = '/home/my-php' 
+        DEPLOY_DIR = '/my-php' 
         SSH_USER = 'jenkins'
         SSH_HOST = 'tcp://dind:2375' 
     }
