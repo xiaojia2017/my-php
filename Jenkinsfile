@@ -32,16 +32,6 @@ pipeline {
               sh 'ls -la' // 查看当前目录下的文件结构
             }
         }
-		
-		stage('Prepare Deploy') {
-             steps {
-               script {
-                 // 获取当前工作目录的最后一层目录名（即 Jenkins 任务名）
-                 env.REMOVE_PREFIX = "${env.WORKSPACE}/"
-                 echo "绝对路径前缀: ${env.REMOVE_PREFIX}"
-               }
-            }
-        }
 
         stage('Deploy to Server') {
             steps {
@@ -52,9 +42,9 @@ pipeline {
                             configName: 'jenkins',
                             transfers: [
                                 sshTransfer(
-                                    sourceFiles: '${env.WORKSPACE}/**/*',
+                                    sourceFiles: '**/*',
                                     remoteDirectory: "${env.DEPLOY_DIR}",
-                                    removePrefix: "${env.REMOVE_PREFIX}/",
+                                    removePrefix: '',
                                     execCommand: '''
 									    echo "DEPLOY_DIR: ${env.DEPLOY_DIR}" &&
                                         ls -la ${env.DEPLOY_DIR} &&
